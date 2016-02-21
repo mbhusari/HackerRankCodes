@@ -1,0 +1,103 @@
+import java.util.Scanner;
+
+/**
+ * Created by mbhusari on 2/20/16.
+ */
+public class Main {
+
+    public static class Stack {
+        int maxSize;
+        int top;
+        String stackContainer[];
+
+        public Stack(int size){
+            maxSize = size;
+            stackContainer = new String[maxSize];
+            top=0;
+        }
+
+        public void push(String str){
+            if(top == maxSize)
+                return;
+            stackContainer[top] = str;
+            top = top +1;
+        }
+
+        public String pop(){
+            if(top == 0)
+                return null;
+            top = top -1;
+            String str = stackContainer[top];
+            return str;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        int numberOfInputs;
+        int stackSize;
+        int i =0;
+        int[] yesNoArray;
+        Scanner scnr = new Scanner(System.in);
+        numberOfInputs = scnr.nextInt();
+        yesNoArray = new int[numberOfInputs];
+
+        while(i < numberOfInputs){
+            int index = 0;
+            int strLength;
+            String inputString = scnr.next();
+            strLength = inputString.length();
+            if((strLength % 2) != 0){
+                yesNoArray[i]=0;
+                i++;
+                continue;
+            }
+            Stack stack = new Stack(strLength/2);
+
+            for(index=0 ; index<strLength;index++){
+                if(inputString.charAt(index) == '{' || inputString.charAt(index) == '[' || inputString.charAt(index) == '(') {
+                    stack.push(inputString.charAt(index)+"");
+                    continue;
+                }
+
+                String poppedChar = stack.pop();
+                if(poppedChar == null) {
+                    yesNoArray[i]=0;
+                    break;
+                }
+
+                if(inputString.charAt(index) == ']')
+                    if(poppedChar.charAt(0) != '['){
+                        yesNoArray[i]=0;
+                        break;
+                    }
+
+                if(inputString.charAt(index) == '}')
+                    if(poppedChar.charAt(0) != '{'){
+                        yesNoArray[i]=0;
+                        break;
+                    }
+
+                if(inputString.charAt(index) == ')')
+                    if(poppedChar.charAt(0) != '('){
+                        yesNoArray[i]=0;
+                        break;
+                    }
+
+            }
+            if(index == strLength)
+                yesNoArray[i]=1;
+            i++;
+        }
+        i = 0;
+        while(i < numberOfInputs){
+            if(yesNoArray[i] == 1)
+                System.out.println("YES");
+            else
+                System.out.println("NO");
+            i++;
+        }
+
+    }
+
+}
