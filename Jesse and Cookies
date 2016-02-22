@@ -1,0 +1,79 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+        Node front;
+        Node rear;
+        public static class Node {
+            Node next;
+            int data;
+
+            Node(int data) {
+                this.next = null;
+                this.data = data;
+            }
+        }
+
+        public void enqueueList(Node node){
+            if(front == null) {
+                front = node;
+                rear = front;
+            }
+            else {
+                front.next = node;
+                front = front.next;
+
+                }
+            }
+
+
+        public Node dequeueList(){
+            Node dequedNode = rear;
+            if(rear == null) {
+                return null;
+            }
+            else {
+                rear = rear.next;
+                return dequedNode;
+            }
+        }
+
+        public static void main(String[] args) {
+            int totalElemets,averageSweat;
+            int intArray[];
+            int count = 0;
+            Main solution = new Main();
+            Scanner in = new Scanner(System.in);
+
+            totalElemets = in.nextInt();
+            averageSweat = in.nextInt();
+
+            int index =0;
+            intArray = new int[totalElemets];
+            while(index<totalElemets){
+                intArray[index] = in.nextInt();
+                index++;
+            }
+
+            Arrays.sort(intArray);
+
+            index =0;
+            while(index<totalElemets){
+                solution.enqueueList(new Node(intArray[index]));
+                index++;
+            }
+
+            int first=solution.rear.data;
+            while(first < averageSweat){
+                count++;
+                first=solution.dequeueList().data;
+                int second = solution.dequeueList().data;
+                int newData = 1*first + 2*second;
+                solution.enqueueList(new Node(newData));
+                first=solution.rear.data;
+            }
+            System.out.println(count);
+
+        }
+    }
+
