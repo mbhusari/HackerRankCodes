@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        String input;
+        boolean isPanagram = true;
+        Scanner scanner = new Scanner(System.in);
+        
+        input = scanner.nextLine();
+        input = input.toLowerCase();
+        
+        for(char alphabet = 'a'; alphabet <= 'z';alphabet++) {
+                if(!input.contains(String.valueOf(alphabet))){
+                    isPanagram = false;
+                }
+        }
+        
+        if(isPanagram)
+           System.out.println("pangram ");
+        else
+           System.out.println("not pangram ");
+        
+        
+        
+    }
+}
