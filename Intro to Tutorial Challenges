@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        int valueToSearch;
+        int totalElements;
+        int[] elementsArray;
+        
+        Scanner scnr = new Scanner(System.in);
+        valueToSearch = scnr.nextInt();
+        totalElements = scnr.nextInt();
+        
+        elementsArray = new int[totalElements];
+        
+        int index = 0;
+        
+        for(index = 0; index < totalElements; index++){
+            elementsArray[index] = scnr.nextInt();
+        }
+       
+        for(index = 0; index < totalElements; index++){
+            if(valueToSearch == elementsArray[index])
+                System.out.println(index);
+        }
+        
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    }
+}
